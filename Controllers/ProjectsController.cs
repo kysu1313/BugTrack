@@ -75,7 +75,7 @@ namespace BugTrack.Controllers
         }
 
         // POST: Projects/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,17 +95,17 @@ namespace BugTrack.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<ActionResult> NewBug([Bind(Include = "Id,ProjectName,OS,Description")] Project project)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(project).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+        //public async Task<ActionResult> NewBug([Bind(Include = "Id,ProjectName,OS,Description")] Project project)
+        //{
+       //     if (ModelState.IsValid)
+       //     {
+       //         db.Entry(project).State = EntityState.Modified;
+       //         await db.SaveChangesAsync();
+       //         return RedirectToAction("Index");
+        //    }
 
-            return View(project);
-        }
+        //    return View(project);
+        //}
 
         // GET: Projects/Delete/5
         public async Task<ActionResult> Delete(int? id)

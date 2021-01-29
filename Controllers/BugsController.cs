@@ -38,14 +38,28 @@ namespace BugTrack.Controllers
         }
 
         // GET: Bugs/Create
-        public ActionResult Create()
+        //[Route("Home")]
+        public async Task<ActionResult> CreateFromProject(int? id)
         {
-            //var severities = db.Severity.ToList();
-            //var viewModel = new NewBugViewModel
+            //if (ModelState.IsValid)
             //{
-                
+            //    db.Bugs.Add(bug);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
             //}
-            return View();
+
+            Bug bugNew = new Bug();
+            Project project = await db.Projects.FindAsync(id);
+            var severity = db.Severity.ToList();
+
+            NewBugViewModel newBugViewModel = new NewBugViewModel
+            {
+                Bug = bugNew,
+                Project = project,
+                Severities = severity,
+            };
+
+            return View(newBugViewModel);
         }
 
         // POST: Bugs/Create

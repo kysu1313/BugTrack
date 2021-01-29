@@ -40,7 +40,7 @@
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
-            @Html.ActionLink("Submit Bug", "NewBug", "Projects", new { id = item.Id }, null)
+            @Html.ActionLink("Submit Bug", "CreateFromProject", "Bugs", new { id = item.Id }, null)
         </td>
     </tr>
 }

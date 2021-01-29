@@ -23,7 +23,7 @@ namespace BugTrack.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Bug> Bugs { get; set; }
-        public DbSet<Severity> Severity { get; set; }
+        //public DbSet<Severity> Severity { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

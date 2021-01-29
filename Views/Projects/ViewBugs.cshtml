@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BugTrack.Models.Bug>
+
+@{
+    ViewBag.Title = "ViewBugs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewBugs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BugSeverity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Component)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BugDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BugSeverity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Component)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BugDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolved)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

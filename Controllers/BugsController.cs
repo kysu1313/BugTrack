@@ -41,23 +41,19 @@ namespace BugTrack.Controllers
         //[Route("Home")]
         public async Task<ActionResult> CreateFromProject(int? id)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Bugs.Add(bug);
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Index");
-            //}
 
             Bug bugNew = new Bug();
             Project project = await db.Projects.FindAsync(id);
-            var severity = db.Severity.ToList();
+            //var severity = db.Severity.ToList();
 
             NewBugViewModel newBugViewModel = new NewBugViewModel
             {
                 Bug = bugNew,
                 Project = project,
-                Severities = severity,
+                //Severities = severity,
             };
+
+            newBugViewModel.Bug.projectId = project.Id;
 
             return View(newBugViewModel);
         }
@@ -67,6 +63,25 @@ namespace BugTrack.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Severity,Component,BugDescription,Resolved")] Bug bug)
         {
+
+            if (ModelState.IsValid)
+            {
+                db.Bugs.Add(bug);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(bug);
+        }
+
+        // POST: Bugs/CreateFromProject
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SubmitBugFromProject([Bind(Include = "Severities,User,Project,Bug")] NewBugViewModel newBugViewModel)
+        {
+            Bug bug = newBugViewModel.Bug;
+            //bug.project = newBugViewModel.Project;
+            //bug.project = newBugViewModel.Project.Id;
             if (ModelState.IsValid)
             {
                 db.Bugs.Add(bug);

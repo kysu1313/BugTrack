@@ -11,7 +11,7 @@ namespace BugTrack.Models
         public Severity BugSeverity { get; set; }
         public string Component { get; set; }
         [Required]
-        public Project project { get; set; }
+        public int projectId { get; set; }
         [Display(Name = "Bug Description")]
         public string BugDescription { get; set; }
         public Boolean Resolved { get; set; }
@@ -20,11 +20,11 @@ namespace BugTrack.Models
 
     }
 
-    //public enum Severity
-    //{
-    //    One = 1,
-    //    Two = 2,
-    //    Three = 3,
-    //    Four = 4
-    //}
+    public enum Severity
+    {
+        One = 1,
+        Two = 2,
+        Three = 3,
+        Four = 4
+    }
 }

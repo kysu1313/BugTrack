@@ -15,8 +15,10 @@ namespace BugTrack
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
+            // Register the API
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

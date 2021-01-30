@@ -80,8 +80,6 @@ namespace BugTrack.Controllers
         public async Task<ActionResult> SubmitBugFromProject([Bind(Include = "Severities,User,Project,Bug")] NewBugViewModel newBugViewModel)
         {
             Bug bug = newBugViewModel.Bug;
-            //bug.project = newBugViewModel.Project;
-            //bug.project = newBugViewModel.Project.Id;
             if (ModelState.IsValid)
             {
                 db.Bugs.Add(bug);
@@ -122,6 +120,7 @@ namespace BugTrack.Controllers
         }
 
         // GET: Bugs/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

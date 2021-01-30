@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -33,6 +34,11 @@ namespace BugTrack.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public IEnumerable<Bug> getBugsFromProjectId(int? projectId)
+        {
+            return (IEnumerable<Bug>)Bugs.AllAsync(m => m.projectId == projectId);
         }
     }
 }

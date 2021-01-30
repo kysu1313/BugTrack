@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTrack.Models;
+using BugTrack.ViewModels;
 
 namespace BugTrack.Controllers
 {
@@ -44,12 +45,23 @@ namespace BugTrack.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Project project = await db.Projects.FindAsync(id);
-            IEnumerable<Bug> bugs = project.Bugs;
+            IEnumerable<Bug> bugs = db.Bugs.Where(a => a.projectId == id);
             if (project == null)
             {
                 return HttpNotFound();
+            } else if (bugs == null)
+            {
+                return View();
             }
-            return View(bugs);
+
+            ViewBugsViewModel vbvm = new ViewBugsViewModel
+            {
+                Bugs = bugs,
+                Project = project,
+            };
+
+
+            return View(vbvm);
         }
 
 

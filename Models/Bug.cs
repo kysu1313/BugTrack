@@ -12,6 +12,7 @@ namespace BugTrack.Models
         public string Component { get; set; }
         [Required]
         public int projectId { get; set; }
+        public string projectName { get; set; }
         [Display(Name = "Bug Description")]
         public string BugDescription { get; set; }
         public Boolean Resolved { get; set; }

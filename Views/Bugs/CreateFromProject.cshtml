@@ -14,54 +14,54 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(model => model.Bug.projectId)
 
-    <div class="form-horizontal">
-        <h4 style="text-decoration: underline;">
-            @Html.DisplayNameFor(model => model.Project.ProjectName)
-            <a>: </a>
-            @Html.DisplayFor(model => model.Project.ProjectName)
-        </h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bug.Component, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bug.Component, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bug.Component, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <h4 style="text-decoration: underline;">
+        @Html.DisplayNameFor(model => model.Project.ProjectName)
+        <a>: </a>
+        @Html.DisplayFor(model => model.Project.ProjectName)
+    </h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bug.Component, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Bug.Component, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Bug.Component, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bug.BugSeverity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Bug.BugSeverity, new SelectList(Enum.GetValues(typeof(Severity))), "Select Severity")
-                @Html.ValidationMessageFor(model => model.Bug.BugSeverity, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bug.BugDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Bug.BugDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Bug.BugDescription, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bug.BugDescription, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Bug.BugDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Bug.BugDescription, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bug.BugSeverity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Bug.BugSeverity, new SelectList(Enum.GetValues(typeof(Severity))), "Select Severity")
+            @Html.ValidationMessageFor(model => model.Bug.BugSeverity, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Bug.Resolved, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.Bug.Resolved)
-                    @Html.ValidationMessageFor(model => model.Bug.Resolved, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Bug.Resolved, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Bug.Resolved)
+                @Html.ValidationMessageFor(model => model.Bug.Resolved, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

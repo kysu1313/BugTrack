@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table id="bugs" class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BugSeverity)
@@ -24,29 +24,56 @@
         <th>
             @Html.DisplayNameFor(model => model.Resolved)
         </th>
-        <th></th>
+        <th>
+            Actions
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BugSeverity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Component)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BugDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Resolved)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BugSeverity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Component)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BugDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resolved)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-info" })
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger js-delete" })*@
+                <button data-bug-id="@item.Id" class="btn btn-sm btn-danger js-delete">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#bugs .js-delete").on("click", function () {
+                var button = $(this);
+                bootbox.confirm("Are you shure you want to delete this bug?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/bugapi/" + button.attr("data-bug-id"),
+                            method: "DELETE",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

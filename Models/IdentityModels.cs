@@ -27,7 +27,7 @@ namespace BugTrack.Models
         //public DbSet<Severity> Severity { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false) // DefaultConnection
         {
         }
 

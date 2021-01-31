@@ -56,8 +56,8 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-# Web.config
-Web.config
+# AppSettings.config
+AppSettings.config
 
 # StyleCop
 StyleCopReport.xml

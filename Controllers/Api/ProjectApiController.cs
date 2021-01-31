@@ -10,12 +10,12 @@ namespace BugTrack.Controllers.Api
 {
     public class ProjectApiController : ApiController
     {
-        private ApplicationDbContext _context;
+        private ApplicationDbContext _context = new ApplicationDbContext();
 
-        public ProjectApiController()
-        {
-            _context = new ApplicationDbContext();
-        }
+        //public ProjectApiController()
+        //{
+        //    _context = new ApplicationDbContext();
+        //}
 
         // GET /api/projects
         public IEnumerable<Project> GetProjects()

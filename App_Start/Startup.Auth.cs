@@ -2,10 +2,12 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
+//using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
-using Owin;
+using Owin.Security.Providers.GitHub;
 using BugTrack.Models;
+using Owin;
+using Microsoft.Owin.Security.Cookies;
 
 namespace BugTrack
 {
@@ -34,7 +36,7 @@ namespace BugTrack
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -55,9 +57,14 @@ namespace BugTrack
             //   consumerSecret: "");
 
 
-            app.UseFacebookAuthentication(
-               appId: "749755935641780",
-               appSecret: "259470a186200b1596ba1930c4234b8a");
+            //app.UseFacebookAuthentication(
+            //   appId: "749755935641780",
+            //   appSecret: "259470a186200b1596ba1930c4234b8a");
+
+
+            app.UseGitHubAuthentication(
+                clientId: "bde32ecd12eb3276d528",
+                clientSecret: "23e5e1c7618b6c1d1bfbf79957245ca4993ba292");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

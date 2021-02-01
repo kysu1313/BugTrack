@@ -24,7 +24,7 @@ namespace BugTrack.Controllers
             {
                 return View("Index", await db.Bugs.ToListAsync());
             }
-            return View("RestrictedAccessIndex", await db.Bugs.ToListAsync());
+            return View("RestrictedAccessIndex", await db.Bugs.ToListAsync()); 
         }
 
         // GET: Bugs/Details/5

@@ -159,8 +159,10 @@ namespace BugTrack.Controllers
 
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageProjects"));
+                    //await roleManager.CreateAsync(new IdentityRole("AdminRole"));
+                    //await UserManager.AddToRoleAsync(user.Id, "AdminRole");
                     //await UserManager.AddToRoleAsync(user.Id, "CanManageProjects");
+
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     

@@ -14,7 +14,7 @@ namespace BugTrack.Controllers
 {
     public class BugsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext(); 
 
         // GET: Bugs
         [AllowAnonymous]

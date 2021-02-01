@@ -73,7 +73,7 @@ namespace BugTrack.Controllers
 
 
         // GET: Projects/Create
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public ActionResult Create()
         {
             return View();
@@ -84,7 +84,7 @@ namespace BugTrack.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public async Task<ActionResult> Create([Bind(Include = "Id,ProjectName,OS,Description")] Project project)
         {
             if (ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace BugTrack.Controllers
         }
 
         // GET: Projects/Edit/5
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace BugTrack.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public async Task<ActionResult> Edit([Bind(Include = "Id,ProjectName,OS,Description")] Project project)
         {
             if (ModelState.IsValid)
@@ -131,7 +131,7 @@ namespace BugTrack.Controllers
         }
 
         // GET: Projects/Delete/5
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,7 +149,7 @@ namespace BugTrack.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Project project = await db.Projects.FindAsync(id);
@@ -159,7 +159,7 @@ namespace BugTrack.Controllers
         }
 
 
-        [Authorize(Roles = "CanManageMovies")]
+        [Authorize(Roles = RoleName.CanManageProjects)]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

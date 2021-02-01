@@ -17,9 +17,14 @@ namespace BugTrack.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Bugs
+        [AllowAnonymous]
         public async Task<ActionResult> Index()
         {
-            return View(await db.Bugs.ToListAsync());
+            if (User.IsInRole("CanManageProjects"))
+            {
+                return View("Index", await db.Bugs.ToListAsync());
+            }
+            return View("RestrictedAccessIndex", await db.Bugs.ToListAsync());
         }
 
         // GET: Bugs/Details/5

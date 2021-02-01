@@ -8,5 +8,6 @@ namespace BugTrack.Models
     public class RoleName
     {
         public const string CanManageProjects = "CanManageProjects";
+        public const string AdminRole = "AdminRole";
     }
 }

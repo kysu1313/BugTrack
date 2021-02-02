@@ -5,11 +5,13 @@ using Newtonsoft.Json.Linq;
 //using Newtonsoft.Json.Linq;
 using Owin;
 using System;
-using System.IdentityModel.Claims;
+using System.Security.Claims;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
 
 [assembly: OwinStartupAttribute(typeof(BugTrack.Startup))]
 namespace BugTrack
@@ -19,8 +21,6 @@ namespace BugTrack
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-
         }
     }
-
 }

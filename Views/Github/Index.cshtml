@@ -1,0 +1,31 @@
+﻿@using BugTrack.Models
+@model RepCollections
+
+@{
+    ViewBag.Title = "Repositories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Repositories</h2>
+        <br />
+        <p>User: @Html.DisplayNameFor(model => model.Repositories)</p>
+        <div>
+            <table class="table">
+                <tbody>
+                    <tr><th></th></tr>
+                    @foreach (Repositories r in Model.Repositories)
+                    {
+                        <tr>
+                            <td>
+                                @r.name
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

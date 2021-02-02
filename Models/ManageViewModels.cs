@@ -2,16 +2,28 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Octokit;
 
 namespace BugTrack.Models
 {
     public class IndexViewModel
     {
+
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+    }
+
+    public class GithubIndexViewModel
+    {
+        private IReadOnlyList<Repository> repositories { get; set; }
+
+        public GithubIndexViewModel(IReadOnlyList<Repository> repositories)
+        {
+            this.repositories = repositories;
+        }
     }
 
     public class ManageLoginsViewModel

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 using System.Web.Mvc;
 
 namespace BugTrack.Controllers
@@ -9,6 +6,7 @@ namespace BugTrack.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View("Index");
@@ -24,6 +22,13 @@ namespace BugTrack.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Welcome()
+        {
+            ViewBag.Message = "Welcome Page.";
 
             return View();
         }

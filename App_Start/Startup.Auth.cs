@@ -8,6 +8,15 @@ using Owin.Security.Providers.GitHub;
 using BugTrack.Models;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.AspNetCore.Authentication.OAuth;
+using System.Threading.Tasks;
+
+using System;
+using System.Security.Claims;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace BugTrack
 {
@@ -62,15 +71,58 @@ namespace BugTrack
             //   appSecret: "259470a186200b1596ba1930c4234b8a");
 
 
-            app.UseGitHubAuthentication(
-                clientId: "bde32ecd12eb3276d528",
-                clientSecret: "23e5e1c7618b6c1d1bfbf79957245ca4993ba292");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            //app.UseGitHubAuthentication(
+            //    clientId: "bde32ecd12eb3276d528",
+            //    clientSecret: "6c8160f2a9e80b9121a55b7169a44dee87d8eb21 "
+            //    );
+
+
+            var githubOptions = new GitHubAuthenticationOptions
+            {
+                ClientId = "bde32ecd12eb3276d528",
+                ClientSecret = "6c8160f2a9e80b9121a55b7169a44dee87d8eb21 ",
+                Provider = new GitHubAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        if (!String.IsNullOrEmpty(context.AccessToken))
+                        {
+                            // do something with AccessToken
+                            Console.Write(context.AccessToken);
+                        }
+                        if (!String.IsNullOrEmpty(context.Name))
+                        {
+                            // do something with TeamId
+                            Console.Write(context.Name);
+                        }
+                        if (!String.IsNullOrEmpty(context.UserName))
+                        {
+                            // do something with TeamName
+                            Console.Write(context.UserName);
+                        }
+                        if (!String.IsNullOrEmpty(context.Id))
+                        {
+                            // do something with UserId
+                            Console.Write(context.Id);
+                        }
+                        if (context.User != null)
+                        {
+                            // do something with BotUserId
+                            Console.Write(context.User);
+                        }
+                        return Task.FromResult<object>(context);
+                    }
+                }
+            };
+
+            //githubOptions.Scope.Add("incoming-webhook");
+            //githubOptions.Scope.Add(CallbackPath("/signin-github"));
+
+            app.UseGitHubAuthentication(githubOptions);
         }
+
+
+
     }
 }

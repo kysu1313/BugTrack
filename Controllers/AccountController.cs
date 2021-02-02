@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BugTrack.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BugTrack.Controllers
 {
@@ -290,6 +291,14 @@ namespace BugTrack.Controllers
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
+
+        //[HttpGet]
+        //[Route("/oauth/github")]
+        //public ActionResult GithubLogin(string provider, string returnUrl)
+        //{
+        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", "Github"));
+        //}
+
 
         //
         // GET: /Account/SendCode

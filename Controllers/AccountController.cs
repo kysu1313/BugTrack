@@ -289,7 +289,11 @@ namespace BugTrack.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            //Session["Workaround"] = 0;
+            var accessToken = Session["OAuthToken"] as string;
+            Console.WriteLine(accessToken);
+            ChallengeResult challenge = new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return challenge;
         }
 
         //[HttpGet]
@@ -340,9 +344,17 @@ namespace BugTrack.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+
+
+            //var res = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
+
             if (loginInfo == null)
             {
+
+                //returnUrl = &quot;/ Home / Account & quot; ;
+
                 return RedirectToAction("Login");
             }
 

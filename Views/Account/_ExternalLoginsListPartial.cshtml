@@ -16,8 +16,6 @@
     }
     else
     {
-
-        @Html.ActionLink("GitHub Login", "Login", "Github", new { @class = "btn btn-sm btn-success" })
         
 
         using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl }))

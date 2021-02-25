@@ -11,9 +11,9 @@ namespace BugTrack.Controllers.Api
     {
         // GET: Github
         const string clientId = "bde32ecd12eb3276d528";
-        private const string clientSecret = "6c8160f2a9e80b9121a55b7169a44dee87d8eb21 ";
+        private const string clientSecret = "59216849e48b4e1ad8f87bf10a702399535b6164";
         readonly GitHubClient client =
-            new GitHubClient(new ProductHeaderValue("Haack-GitHub-Oauth-Demo"), new Uri("https://github.com/"));
+            new GitHubClient(new ProductHeaderValue("CoinTrack"), new Uri("https://github.com/kysu1313"));
 
         // This URL uses the GitHub API to get a list of the current user's
         // repositories which include public and private repositories.
@@ -57,7 +57,7 @@ namespace BugTrack.Controllers.Api
                 var token = await client.Oauth.CreateAccessToken(
                     new OauthTokenRequest(clientId, clientSecret, code)
                     {
-                        RedirectUri = new Uri("http://localhost:58292/home/authorize")
+                        RedirectUri = new Uri("http://localhost:58292/github/index")
                     });
                 Session["OAuthToken"] = token.AccessToken;
             }

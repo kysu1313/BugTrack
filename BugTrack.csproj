@@ -98,6 +98,9 @@
     <Reference Include="Microsoft.AspNetCore.Authentication.OAuth, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Authentication.OAuth.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.CookiePolicy, Version=2.2.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.CookiePolicy.2.2.8\lib\netstandard2.0\Microsoft.AspNetCore.CookiePolicy.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Cryptography.Internal.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
     </Reference>
@@ -454,9 +457,14 @@
     <Compile Include="Migrations\202102020338435_AuthSetup.Designer.cs">
       <DependentUpon>202102020338435_AuthSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102250059120_GitClass.cs" />
+    <Compile Include="Migrations\202102250059120_GitClass.Designer.cs">
+      <DependentUpon>202102250059120_GitClass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Bug.cs" />
+    <Compile Include="Models\GitHub.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
@@ -603,6 +611,9 @@
     <EmbeddedResource Include="Migrations\202102020338435_AuthSetup.resx">
       <DependentUpon>202102020338435_AuthSetup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102250059120_GitClass.resx">
+      <DependentUpon>202102250059120_GitClass.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <!-- <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -632,7 +643,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+  <!-- <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
@@ -640,7 +651,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
     <Error Condition="!Exists('..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props'))" />
-  </Target>
+  </Target> -->
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.10.9\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

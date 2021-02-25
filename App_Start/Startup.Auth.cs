@@ -3,23 +3,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 //using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin.Security.Providers.GitHub;
 using BugTrack.Models;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
 using System.Threading.Tasks;
-
-using System;
-using System.Security.Claims;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Authentication;
-using System.Security.Policy;
-using System.Configuration;
 
 namespace BugTrack
 {
@@ -49,6 +37,7 @@ namespace BugTrack
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });
+
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -77,7 +66,7 @@ namespace BugTrack
 
             //app.UseGitHubAuthentication(
             //    clientId: "bde32ecd12eb3276d528",
-            //    clientSecret: "959511fd67c9a471edb35113108d11dd16e8d307 "
+            //    clientSecret: "59216849e48b4e1ad8f87bf10a702399535b6164 "
             //    );
 
 
@@ -88,7 +77,7 @@ namespace BugTrack
             var githubOptions = new GitHubAuthenticationOptions
             {
                 ClientId = "bde32ecd12eb3276d528",
-                ClientSecret = "23e5e1c7618b6c1d1bfbf79957245ca4993ba292",
+                ClientSecret = "59216849e48b4e1ad8f87bf10a702399535b6164",
                 Provider = new GitHubAuthenticationProvider
                 {
                     OnAuthenticated = context =>

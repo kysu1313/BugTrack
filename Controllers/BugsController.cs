@@ -143,7 +143,7 @@ namespace BugTrack.Controllers
         // POST: Bugs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id) 
         {
             Bug bug = await db.Bugs.FindAsync(id);
             db.Bugs.Remove(bug);

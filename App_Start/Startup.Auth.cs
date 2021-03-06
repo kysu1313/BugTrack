@@ -8,11 +8,17 @@ using BugTrack.Models;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
 using System.Threading.Tasks;
+using Microsoft.Owin.Host.SystemWeb;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Extensions.Logging;
 
 namespace BugTrack
 {
     public partial class Startup
     {
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -27,6 +33,7 @@ namespace BugTrack
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                //CookieManager = new SystemWebChunkingCookieManager(),
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider
                 {
@@ -36,7 +43,7 @@ namespace BugTrack
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });
+            });;
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
@@ -64,63 +71,63 @@ namespace BugTrack
 
 
 
-            //app.UseGitHubAuthentication(
-            //    clientId: "bde32ecd12eb3276d528",
-            //    clientSecret: "59216849e48b4e1ad8f87bf10a702399535b6164 "
-            //    );
+            app.UseGitHubAuthentication(
+                clientId: "bde32ecd12eb3276d528",
+                clientSecret: "59216849e48b4e1ad8f87bf10a702399535b6164"
+                );
 
 
             //app.UseGitHubAuthentication(
             //    clientId: ConfigurationManager.AppSettings["GitHub:ClientId"],
             //    clientSecret: ConfigurationManager.AppSettings["GitHub:ClientSecret"]);
 
-            var githubOptions = new GitHubAuthenticationOptions
-            {
-                ClientId = "bde32ecd12eb3276d528",
-                ClientSecret = "59216849e48b4e1ad8f87bf10a702399535b6164",
-                Provider = new GitHubAuthenticationProvider
-                {
-                    OnAuthenticated = context =>
-                    {
-                        if (!String.IsNullOrEmpty(context.AccessToken))
-                        {
-                            // do something with AccessToken
-                            Console.Write(context.AccessToken);
-                        }
-                        if (!String.IsNullOrEmpty(context.Name))
-                        {
-                            // do something with TeamId
-                            Console.Write(context.Name);
-                        }
-                        if (!String.IsNullOrEmpty(context.UserName))
-                        {
-                            // do something with TeamName
-                            Console.Write(context.UserName);
-                        }
-                        if (!String.IsNullOrEmpty(context.Id))
-                        {
-                            // do something with UserId
-                            Console.Write(context.Id);
-                        }
-                        if (context.User != null)
-                        {
-                            // do something with BotUserId
-                            Console.Write(context.User);
-                        }
-                        return Task.FromResult<object>(context);
-                    }
-                }
-            };
+            //var githubOptions = new GitHubAuthenticationOptions
+            //{
+            //    ClientId = "bde32ecd12eb3276d528",
+            //    ClientSecret = "59216849e48b4e1ad8f87bf10a702399535b6164",
+            //    Provider = new GitHubAuthenticationProvider
+            //    {
+            //        OnAuthenticated = context =>
+            //        {
+            //            if (!String.IsNullOrEmpty(context.AccessToken))
+            //            {
+            //                // do something with AccessToken
+            //                Console.Write(context.AccessToken);
+            //            }
+            //            if (!String.IsNullOrEmpty(context.Name))
+            //            {
+            //                // do something with TeamId
+            //                Console.Write(context.Name);
+            //            }
+            //            if (!String.IsNullOrEmpty(context.UserName))
+            //            {
+            //                // do something with TeamName
+            //                Console.Write(context.UserName);
+            //            }
+            //            if (!String.IsNullOrEmpty(context.Id))
+            //            {
+            //                // do something with UserId
+            //                Console.Write(context.Id);
+            //            }
+            //            if (context.User != null)
+            //            {
+            //                // do something with BotUserId
+            //                Console.Write(context.User);
+            //            }
+            //            return Task.FromResult<object>(context);
+            //        }
+            //    }
+            //};
 
-            githubOptions.Scope.Add("Email");
-            githubOptions.Scope.Add("Username");
-            githubOptions.Scope.Add("public_repo");
-            githubOptions.Scope.Add("notifications");
-            githubOptions.Scope.Add("read:user");
+            //githubOptions.Scope.Add("Email");
+            //githubOptions.Scope.Add("Username");
+            //githubOptions.Scope.Add("public_repo");
+            //githubOptions.Scope.Add("notifications");
+            //githubOptions.Scope.Add("read:user");
 
-            //githubOptions.Provider.ReturnEndpoint("");
+            ////githubOptions.Provider.ReturnEndpoint("");
 
-            app.UseGitHubAuthentication(githubOptions);
+            //app.UseGitHubAuthentication(githubOptions);
         }
 
 

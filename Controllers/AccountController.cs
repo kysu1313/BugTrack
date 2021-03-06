@@ -290,7 +290,7 @@ namespace BugTrack.Controllers
         {
             // Request a redirect to the external login provider
             //Session["Workaround"] = 0;
-            var accessToken = Session["OAuthToken"] as string;
+            var accessToken = Session["OAuthToken"] as string; //GitHubToken
             Console.WriteLine(accessToken);
             ChallengeResult challenge = new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
             return challenge;

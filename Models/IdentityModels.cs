@@ -13,7 +13,7 @@ namespace BugTrack.Models
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            HttpContext.Current.Session["RunSession"] = "1";
+            //HttpContext.Current.Session["RunSession"] = "1";
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here

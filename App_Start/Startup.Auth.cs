@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Extensions.Logging;
+using System.Configuration;
+using System.Security.Claims;
 
 namespace BugTrack
 {
@@ -71,15 +73,37 @@ namespace BugTrack
 
 
 
-            app.UseGitHubAuthentication(
-                clientId: "bde32ecd12eb3276d528",
-                clientSecret: "59216849e48b4e1ad8f87bf10a702399535b6164"
-                );
+            //app.UseGitHubAuthentication(
+            //    clientId: "bde32ecd12eb3276d528",
+            //    clientSecret: "59216849e48b4e1ad8f87bf10a702399535b6164"
+            //    );
 
+            //string githubId = ConfigurationManager.AppSettings["GitHubClientId"];
+            //string githubSecret = ConfigurationManager.AppSettings["GitHubClientSecret"];
 
             //app.UseGitHubAuthentication(
-            //    clientId: ConfigurationManager.AppSettings["GitHub:ClientId"],
-            //    clientSecret: ConfigurationManager.AppSettings["GitHub:ClientSecret"]);
+            //    clientId: ConfigurationManager.AppSettings["GitHubClientId"],
+            //    clientSecret: ConfigurationManager.AppSettings["GitHubClientSecret"]);
+
+            var options = new GitHubAuthenticationOptions
+            {
+                ClientId = "bde32ecd12eb3276d528",
+                ClientSecret = "59216849e48b4e1ad8f87bf10a702399535b6164",
+                Provider = new GitHubAuthenticationProvider
+                {
+                    OnAuthenticated = context =>
+                    {
+                        context.Identity.AddClaim(new Claim("urn:github:token", context.AccessToken));
+                        context.Identity.AddClaim(new Claim("urn:github:username", context.UserName));
+
+                        return Task.FromResult(true);
+                    }
+                }
+            };
+            options.Scope.Add("user:email");
+            options.Scope.Add("repo");
+
+            app.UseGitHubAuthentication(options);
 
             //var githubOptions = new GitHubAuthenticationOptions
             //{
